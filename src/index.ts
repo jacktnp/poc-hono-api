@@ -7,8 +7,8 @@ export const config = {
   runtime: "edge",
 };
 
-const app = new Hono();
-// const app = new Hono().basePath("/api");
+// const app = new Hono();
+const app = new Hono().basePath("/api");
 
 app.use("*", logger());
 
