@@ -3,7 +3,12 @@ import { logger } from "hono/logger";
 import { handle } from "hono/vercel";
 import api from "./api";
 
+export const config = {
+  runtime: "edge",
+};
+
 const app = new Hono();
+// const app = new Hono().basePath("/api");
 
 app.use("*", logger());
 
