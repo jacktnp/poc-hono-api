@@ -1,10 +1,6 @@
+// server.ts
 import { Hono } from "hono";
-import { handle } from "hono/vercel";
 import routes from "./routes";
-
-export const config = {
-  runtime: "edge",
-};
 
 const app = new Hono().basePath("/api");
 
@@ -14,4 +10,9 @@ app.get("/", (c) => {
 
 app.route("/", routes);
 
-export default handle(app);
+const server = Bun.serve({
+  port: 4000,
+  fetch: app.fetch,
+});
+
+console.log(`🚀 Server is running at http://localhost:${server.port}`);
