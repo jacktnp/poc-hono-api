@@ -30,4 +30,4 @@ app.onError((err, c) => {
 export const GET = handle(app);
 export const POST = handle(app);
 
-export default app;
+// export default app;
