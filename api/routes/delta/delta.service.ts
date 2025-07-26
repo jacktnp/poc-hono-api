@@ -1,21 +1,17 @@
-import pool from "../../../utils/db";
+import { pgTable, serial, varchar, timestamp } from "drizzle-orm/pg-core";
+import { db } from "../../../utils/db";
+
+export const delta = pgTable("delta", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 255 }),
+});
 
 export const deltaService = {
   findAll: async (): Promise<any[]> => {
-    const client = await pool().connect();
-
     try {
-      const result = await client.query(`
-        SELECT
-          id,
-          name
-        FROM
-          delta
-        ORDER BY
-          id
-    `);
+      const result = await db.select().from(delta);
 
-      return result.rows;
+      return result;
     } catch (error) {
       return [];
     }
